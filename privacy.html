@@ -34,14 +34,14 @@ th{color:var(--fg);font-weight:700}
 <table>
 <tr><th>범위</th><th>쓰는 이유</th></tr>
 <tr><td><code>.../auth/youtube.upload</code></td><td>승인받은 채널에 영상을 올리기 위해</td></tr>
-<tr><td><code>.../auth/youtube.readonly</code></td><td>어느 채널에 올리는지 확인하고, 올린 영상의 조회수·좋아요·댓글 수를 읽기 위해</td></tr>
-<tr><td><code>.../auth/youtube</code></td><td>비공개로 올린 영상을 유튜브 심사 뒤 공개로 바꾸기 위해</td></tr>
+<tr><td><code>.../auth/youtube.readonly</code></td><td>어느 채널에 올리는지 확인하고, 채널과 영상의 지표(조회수·좋아요·댓글·공유 수, 시청 시간, 구독자 수와 증감, 국가별 조회수)를 읽기 위해</td></tr>
+<tr><td><code>.../auth/youtube</code></td><td>비공개로 올린 영상을 유튜브 심사 뒤 공개로 바꾸고, 조회수가 낮은 영상이나 운영자가 지정한 영상을 다시 비공개로 되돌리기 위해</td></tr>
 </table>
 
 <h2>2. 다루는 정보</h2>
 <ul>
 <li><b>채널 식별 정보</b> — 채널 ID, 채널명, 프로필·배너 이미지 주소</li>
-<li><b>영상 지표</b> — 이 앱으로 올린 영상의 조회수·좋아요 수·댓글 수</li>
+<li><b>채널·영상 지표</b> — 채널과 채널 영상의 조회수·좋아요 수·댓글 수·공유 수, 시청 시간, 구독자 수와 증감, 국가별 조회수(모두 집계 수치)</li>
 <li><b>접근 토큰</b> — 구글이 발급한 리프레시 토큰</li>
 </ul>
 <p>이름·이메일·주소·결제 정보는 다루지 않습니다. 시청자 개인정보에는 접근하지 않습니다.</p>
@@ -55,13 +55,15 @@ th{color:var(--fg);font-weight:700}
 <h2>4. 어디에 쓰나</h2>
 <ul>
 <li>승인받은 채널에 영상을 올리는 데</li>
-<li>올린 영상이 심사를 통과했는지 확인하는 데</li>
+<li>올린 영상이 심사를 통과했는지 확인하고 공개로 바꾸는 데</li>
+<li>올린 지 24~48시간 사이에 조회수가 30 이하인 영상을 비공개로 되돌리는 데</li>
+<li>시청 시간·구독 증감 등 채널 성과를 운영자에게 보여 주는 데</li>
 <li>조회수 흐름을 보고 다음 업로드 편수를 정하는 데</li>
 <li>업로드 기록을 남겨 나중에 소명할 수 있게 하는 데</li>
 </ul>
 
 <h2>5. 제3자 제공</h2>
-<p><b>제공하지 않습니다.</b> 판매·공유·광고·분석 목적의 활용이 일절 없습니다.
+<p><b>제공하지 않습니다.</b> 제3자 판매·공유·광고·분석 목적의 활용이 일절 없습니다.
 데이터는 구글 API와 운영자의 컴퓨터 사이에서만 오갑니다.</p>
 
 <h2>6. 보관 기간과 삭제</h2>
@@ -85,13 +87,15 @@ th{color:var(--fg);font-weight:700}
 to YouTube channels with the channel owner's explicit consent.</p>
 <ul>
 <li><b>Scopes requested:</b> <code>youtube.upload</code> (to upload videos) and
-<code>youtube.readonly</code> (to identify the target channel and read view/like/comment counts
-of videos uploaded by this tool), and youtube (to switch a reviewed private upload to public).</li>
-<li><b>Data handled:</b> channel ID and title, public metrics of uploaded videos, and the OAuth
-refresh token.</li>
+<code>youtube.readonly</code> (to identify the target channel and read channel and video metrics),
+and <code>youtube</code> (to switch a reviewed private upload to public, and to switch low-performing
+or operator-selected videos back to private).</li>
+<li><b>Data handled:</b> channel ID and title, channel and video metrics (views, likes, comment and
+share counts, watch time, subscriber counts and changes, views by country; aggregate figures only),
+and the OAuth refresh token.</li>
 <li><b>Storage:</b> stored only on the operator's local computer. There is no server. Token files
 are permission-restricted to the owner.</li>
-<li><b>Sharing:</b> data is never sold, shared with third parties, or used for advertising or analytics.</li>
+<li><b>Sharing:</b> data is never sold, shared with third parties, or used for third-party advertising or analytics.</li>
 <li><b>Deletion:</b> access ends immediately when the channel owner revokes it at
 <a href="https://myaccount.google.com/permissions">Google Account → Security → Third-party apps</a>.</li>
 <li><b>Limited Use:</b> use and transfer of information received from Google APIs adheres to the
